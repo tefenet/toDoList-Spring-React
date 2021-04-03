@@ -6,6 +6,7 @@ import CheckboxList from './CheckboxList';
 import IconButton from '@material-ui/core/IconButton';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { fetchTasks } from './RequestConfig';
+import App from '../App';
 
 
 interface taskIF {
@@ -28,9 +29,15 @@ const UserList = ({ tok }: { tok: string }) => {
       )
 
   }, [data, setTasks])
+
+  const logout= ()=>()=>{
+    sessionStorage.clear();
+    window.location.href = '/';    
+  }
+
   return (
     <Container>
-      <IconButton>
+      <IconButton onClick={logout()}>
         <ExitToAppIcon /> exit
       </IconButton>      
       {error && <div>Something went wrong ...</div>}
