@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useCallback } from 'react';
 import './App.css';
+import Login from './components/Login';
+import UserList from './components/UserList';
+import useToken from './hooks/useToken';
+import { QueryClient, QueryClientProvider } from 'react-query'
 
-function App() {
+const queryClient = new QueryClient()
+
+export default function App() {
+
+  const { token, setToken } = useToken(); 
+   
+  const getToken = useCallback((hash:string) => {
+    setToken({'token':hash});
+}, [setToken])
+
+  if(!token) {
+    return <Login setToken={getToken} />
+  }   
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+    <UserList tok={token}/>    
+    </QueryClientProvider>    
   );
 }
-
-export default App;
