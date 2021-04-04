@@ -10,6 +10,7 @@ mvn clean install spring-boot:repackage
 mvn spring-boot:run &
 cd todo-front/ && npm install
 npm run build
+npm i -g serve
 serve -s build
 
 
