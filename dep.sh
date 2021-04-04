@@ -11,7 +11,7 @@ mvn spring-boot:run &
 cd todo-front/ && npm install
 npm run build
 npm i -g serve
-npm serve -s build
+serve -s build
 
 
 
